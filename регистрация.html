@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация</title>
+  <link href="https://fonts.googleapis.com/css2?family=Love+Light&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <img src="Снимок экрана 2025-09-29 163035.png" usemap="#strel" class="streloch">
+     <map name="strel">
+            <area shape="rect" coords="1,1,70,70" href="index.html" alt="" usemap="#strel">
+    </map>
+</head>
+
+<body>
+     
+  <div class="background">
+    <!-- полупрозрачные квадраты -->
+    <div class="square" style="--i:0;"></div>
+    <div class="square" style="--i:1;"></div>
+    <div class="square" style="--i:2;"></div>
+    <div class="square" style="--i:3;"></div>
+    <div class="square" style="--i:4;"></div>
+  </div>
+
+  <div class="glass-form">
+    <h2>Регистрация</h2>
+    <form>
+      <div class = "form-columns">
+         <div class="column left-column">
+          <label>Имя:</label>
+          <input type="text" placeholder="Введите имя" required>
+          <label>Имя:</label>
+          <input type="text" placeholder="Введите фамилию" required>
+        </div>
+        <div class="column right-column">
+          <label>Имя:</label>
+          <input type="email" placeholder="Введите email" required>
+          <label>Имя:</label>
+          <input type="password" placeholder="Введите пароль" required>
+        </div>
+      </div>
+ </form>
+  
+    <div id="captchaBlock">
+      <label>Введите следующие буквы:</label>
+      <div id="captcha" style="font-size: 22px; font-weight: bold; margin: 10px 0;"></div>
+      <input type="text" id="captchaInput" placeholder="Введите капчу">
+    </div>
+
+
+<div id="captchaNumBlock" style="display: none;">
+    <label>Решите пример:</label>
+    <div id="captchaNum" style="font-size: 22px; font-weight: bold; margin: 10px 0;"></div>
+    <input type="text" id="captchaNumInput" placeholder="Ваш ответ">
+    
+</div>
+<p id="captchaMessage" style="color: #420410; background-color: white; font-weight: bold;"></p>
+<button type="button" id="regBtn" disabled>Зарегистрироваться</button>
+
+ 
+
+  
+  
+
+
+ <script src="myscript.js"></script>
+  
+</body>
+</html>
+
+
+<style>
+
+.form-columns {
+    display: flex;
+    gap: 100px;
+    justify-content: space-between;
+    
+    margin-top: 15px;
+}
+.column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.left-column,
+.right-column {
+    flex: 1;
+}
+.column label {
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: white;
+    font-family: "Source Serif 4", serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+.column input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.9);
+    font-family: "Source Serif 4", serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.column input:focus {
+    background-color: #420410;
+    color: white;
+}
+#captcha {
+    color: white;       /* чтобы капча была видна */
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 3px; /* для читаемости */
+}
+   body {
+  margin: 0;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #181818, #2d2f33); 
+}
+.streloch{
+    position:fixed;
+    width: 70px;
+    height: 70px;
+    left: 10px;
+    top: 10px;
+    cursor:pointer;
+}
+/* анимированные квадраты */
+.square {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  animation: float 10s ease-in-out infinite;
+  /* используем переменную для сдвига анимации */
+  animation-delay: calc(var(--i) * -2s);
+  z-index: 1;
+}
+/* анимация движения */
+@keyframes float {
+  0% {
+    transform: translate(calc(-20vw - 40px), calc(5vh - 40px)) rotate(0deg);
+  }
+  25% {
+    transform: translate(calc(50vw + var(--i) * 20px), calc(-30vh + var(--i) * 10px)) rotate(90deg);
+  }
+  50% {
+    transform: translate(calc(28vw - var(--i) * 30px), calc(85vh - var(--i) * 35px)) rotate(180deg);
+  }
+  75% {
+    transform: translate(calc(20vw + var(--i) * 50px), calc(50vh - var(--i) * 20px)) rotate(270deg);
+  }
+  100% {
+    transform: translate(calc(-20vw - 40px), calc(5vh - 40px)) rotate(360deg);
+  }
+}
+.glass-form {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 80px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  margin-top: 10px;
+  width: 560px;
+  text-align: center;
+  overflow: visible;
+}
+.glass-form input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+.glass-form button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to right, #420410, #181818);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.glass-form button:hover {
+  background: linear-gradient(to right, #181818, #420410);
+}
+
+h2{
+    font-family: "Comforter Brush", cursive;
+    
+                font-weight: 400;
+                font-style: normal;
+                font-size: 100px;
+               text-align: center;
+                margin-top: 10px;
+}
+input:focus{
+  background-color:#420410;
+  color: white;
+}
+
+.form{
+  margin-top: 10px;
+}
+
+
+</style>

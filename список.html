@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание списка</title>
+</head>
+<body>
+
+<script>
+    //создаём список ul
+    let ul = document.createElement('ul');
+    document.body.appendChild(ul);
+
+    while (true) {
+        let text = prompt("Введите пункт списка:");
+
+        //если отмена или пустая строка 
+        if (text === null || text.trim() === "") break;
+
+        //создаём li
+        let li = document.createElement('li');
+
+        //записываем текст
+        li.textContent = text;
+
+        //добавляем элемент в ul
+        ul.appendChild(li);
+    }
+</script>
+
+</body>
+</html>

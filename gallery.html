@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Love+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+   
+    <div class="headgal">
+    <map name="strel" class="strelk">
+            <area shape="rect" coords="1,1,70,70" href="index.html" alt="">
+    </map>
+    <img src="Снимок экрана 2025-09-29 163035.png" usemap="#strel" width="70" height="70">
+   
+   <div class="sortcont">
+    <button id="sortPriceBtn" class="sortbtn">
+        Сортировка по цене
+    </button>
+    
+    <!-- фильтр -->
+    <div class="price-filter">
+        <div class="filter-inputs">
+            <input type="number" id="priceFrom" placeholder="Цена от" min="0">
+            <span class="dash">—</span>
+            <input type="number" id="priceTo" placeholder="Цена до" min="0">
+        </div>
+        <div class="filter-buttons">
+            <button id="applyFilterBtn" class="filter-btn">Применить</button>
+            <button id="resetFilterBtn" class="filter-btn reset">Сбросить</button>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+
+    <style>
+        .price-filter {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
+        }
+        .filter-inputs {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .price-filter input {
+            padding: 10px;
+            border-radius: 8px;
+            width: 120px;
+            font-family: "Source Serif 4", serif;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+        }
+        .dash {
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /*
+        .filter-btn {
+                background: #420410;
+                color: white;
+                border: none;
+                padding: 15px 30px;
+                margin-left: 10px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 18px;
+                font-family: "Source Serif 4", serif;
+                transition: background 0.3s ease;
+        }
+
+        
+        .filter-btn:hover {
+            background: #5a0514;
+        }
+            */
+
+
+
+
+        .headgal{
+          gap: 20px;
+          display: flex;
+          padding-top: 20px;
+        }
+        .sortcont{
+          text-align: center;
+          margin-bottom: 30px;
+          display: flex;
+        }
+        .sortbtn {
+                background: #420410;
+                color: white;
+                border: none;
+                padding: 15px 30px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 18px;
+                font-family: "Source Serif 4", serif;
+                transition: background 0.3s ease;
+          }
+        .sortbtn:hover {
+           background: #5a0514;
+          }
+        body {
+            padding: 20px;
+            background: #181818;
+            color: white;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+         .containergal {
+            width: 90%;
+            margin: 2rem auto;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill,minmax(250px, 1fr));
+            grid-auto-rows: 10px; 
+            grid-gap: 15px;
+            grid-auto-flow: dense; /*заполняет пустые места*/
+        }
+        .image-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+           
+        }
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            
+            transition: transform 0.3s ease;
+        }
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(57, 57, 57, 0.7);
+            top: 0;
+            left: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            opacity:0;
+        }
+        .image-item:hover .overlay {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+        sort{
+              font-family: "Comforter Brush", cursive;
+              font-weight: 400;
+                
+                font-size: 100px;
+              text-align: center;
+              margin-bottom: 1rem;
+            }
+         .hearts{
+          position: absolute;
+          right:15px;
+          bottom:15px;
+          z-index: 10;
+          width: 36px;
+          height: 33px;
+
+         }
+         .heart{
+          display:block;
+          width:100%;
+          height: 100%;
+          object-fit: contain;
+          cursor:pointer;
+          padding:4px;
+          /*
+          transition: transform 0.2s ease;*/
+          
+         
+         }
+         .heart:active{
+          transform: scale(1.1);
+         }
+
+         
+        
+        @media (max-width: 768px) {
+            .image-gallery {
+                grid-template-columns: repeat(auto-fill,minmax(100px, 1fr));
+                grid-auto-rows: 10px;
+            }
+           
+            .sort{
+                font-size: 50px;
+               
+            }
+            #fixedCartIcon {
+                top: 550px !important; 
+            }
+            .sortcont {
+              display: flex;
+              align-items: center;
+              
+              gap: 1px;
+          }
+
+          .headgal {
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 20px;
+              padding: 20px;
+          }
+          
+          .sortcont {
+              flex-direction: column;
+              width: 100%;
+              gap: 15px;
+          }
+          
+          .price-filter {
+              width: 100%;
+              flex-direction: column;
+              gap: 15px;
+          }
+          
+          .filter-inputs {
+              flex-direction: row;
+              width: 100%;
+          }
+          
+          .filter-inputs input {
+              width: 100% !important;
+          }
+    
+          .filter-buttons {
+              flex-direction: column;
+              width: 100%;
+          }
+          
+          .filter-btn {
+              width: 100%;
+              margin: 5px 0;
+          }
+
+          .headgal img[usemap="#strel"] {
+              position: fixed; 
+              top: 10px;
+              left: 10px;
+              z-index: 1000; 
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              padding: 8px;
+          }       
+}
+
+        
+
+        .medium {
+            grid-row: span 15;
+        }
+        .small {
+            grid-row: span 10;
+        }
+        .tall {
+            grid-row: span 20;
+        }
+
+        .sortcont {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+   
+        
+        
+    </style>
+</head>
+<body>
+    
+   
+   
+    <div class="containergal">
+      <h2 ><sort>Часы</sort></h2>
+      <div class="image-gallery">
+        
+          <div class="image-item tall">
+             <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+            <img src="часы (1)-min.jpg" alt="" />
+            <div class="overlay"><span>Часы 3500</span></div>
+          </div>
+           <div class="image-item tall">
+              <img src="часы5.jpg" alt="" />
+              <div class="overlay"><span>Часы 4000</span></div>
+              <div class="hearts">
+                <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+              </div>
+            </div>
+       
+          <div class="image-item tall">
+            <img src="часы4.jpg" alt="" />
+            <div class="overlay"><span>Часы 3500</span></div>
+            <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+
+          <div class="image-item tall">
+            <img src="часы3.jpg" alt="" />
+            <div class="overlay"><span>Часы 3500</span></div>
+            <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+
+          <div class="image-item tall">
+            <img src="часы2.jpg" alt="" />
+            <div class="overlay"><span>Часы 3500</span></div>
+            <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+      </div>
+      
+      <h2 ><sort>Подвески</sort></h2>
+      <div class="image-gallery">
+          <div class="image-item medium">
+            <img src="подвеска.jpg" alt="" />
+            <div class="overlay"><span>Подвеска 2000</span></div>
+            <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+        
+          <div class="image-item medium">
+            <img src="подвеска2.jpg" alt="" />
+            <div class="overlay"><span>Подвеска 1800</span></div>
+            <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+
+          <div class="image-item medium">
+            <img src="подвеска4.jpg" alt="" />
+            <div class="overlay"><span>Подвеска 2000</span></div>
+            <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+          
+          <div class="image-item medium">
+            <img src="чекер.jpg" alt="" />
+            <div class="overlay"><span>Чокер 1000</span></div>
+            <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+
+          <div class="image-item medium">
+            <img src="брелок.jpg" alt="" />
+            <div class="overlay"><span>Подвеска 1500</span></div>
+            <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+        </div>
+      
+          <h2 ><sort>Кольца</sort></h2>
+          <div class="image-gallery">
+           
+          <div class="image-item small">
+            <img src="кольца3.jpg" alt="" />
+            <div class="overlay"><span>Кольцо 1000</span></div>
+            <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+           <div class="image-item small">
+            <img src="кольца.jpg" alt="" />
+            <div class="overlay"><span>Кольцо 2000</span></div>
+            <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+           <div class="image-item small">
+            <img src="71280fc3-3321-4d94-93c3-c5dbd2ca2a9d.jpg" alt="" />
+            <div class="overlay"><span>Кольцо 1800</span></div>
+            <div class="hearts">
+              <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+           
+          <div class="image-item small">
+              <img src="кольца2.jpg" alt="" />
+              <div class="overlay"><span>Кольцо 1500</span></div>
+              <div class="hearts">
+                <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+            </div>
+          </div>
+            
+          <div class="image-item small">
+              <img src="кольцо2.jpg" alt="" />
+              <div class="overlay"><span>Кольцо серебро 5000</span></div>
+              <div class="hearts">
+                <img src="сердцебелое.png" class="heart" data-white="сердцебелое.png" data-red="сердцекрасное.png">
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+   
+   
+   <script src="cartscript.js"></script>
+</body>    
+</html>
+
